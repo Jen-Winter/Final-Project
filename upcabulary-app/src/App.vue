@@ -1,22 +1,27 @@
-<!-- src/App.vue -->
 <template>
-  <router-view />
+  <section>
+    <router-view class="app-main" /> <!-- your routes will load inside of these tags -->
+  </section>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { useUserStore } from './stores/user'
+import { useUserStore } from '@/stores/user.js'
 
-const router = useRouter()
 const userStore = useUserStore()
 
 onMounted(async () => {
-  await userStore.fetchUser()
-  if (userStore.user) {
-    router.push('/')
-  } else {
-    router.push('/auth')
+  try {
+    await userStore.fetchUser()
+  } catch (e) {
+    console.log(e)
   }
 })
 </script>
+
+<style scoped>
+.app-main {
+  margin: 0, 0;
+  padding: 0, 0;
+}
+</style>
