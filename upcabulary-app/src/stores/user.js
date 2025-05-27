@@ -3,14 +3,14 @@ import { supabase } from './supabase';
 import { ref } from 'vue';
 
 export const useUserStore = defineStore('user', () => {
-  // STATES: hold data that persists in the store and is reactive
+  // ***STATES*** hold data that persists in the store and is reactive
   // Stores the current authenticated user
   const user = ref(null);
 
   // Stores the list of all users
   const users = ref([]);
 
-  // ACTIONS: methods to interact with the store and perform operations
+  // ***ACTIONS*** methods to interact with the store and perform operations
   // === Authentication Methods ===
   const fetchUser = async () => {
   const {
