@@ -68,7 +68,7 @@ async function logout() {
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0.75rem 1rem;
   display: flex;
@@ -135,5 +135,17 @@ async function logout() {
 
 .logout-icon {
   height: 16px;
+}
+
+@media (min-width: 768px) {
+.header-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0.75rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 }
 </style>

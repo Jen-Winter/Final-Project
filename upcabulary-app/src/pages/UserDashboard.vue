@@ -1,52 +1,120 @@
 <template>
   <div>
     <Header></Header>
-  <section>
-    <h2>Welcome, {{ user?.user_metadata?.name }}</h2>
+    <section>
+      <h2>Welcome, {{ user?.user_metadata?.name }}</h2>
 
-    <AddWordForm />
+      <AddWordForm />
 
-    <h3>📚 To Master</h3>
-    <div class="cards">
-      <div v-for="word in words.filter(w => !w.mastered)" :key="word.id" class="card">
-        <div v-if="editingId === word.id">
-          <input v-model="editedWord" placeholder="Edit word" />
-          <input v-model="editedMeaning" placeholder="Edit meaning" />
-          <button @click="saveEdit(word.id)">💾 Save</button>
-          <button @click="cancelEdit">❌ Cancel</button>
-        </div>
-        <div v-else>
-          <p><strong>{{ word.word }}</strong> - {{ word.meaning }}</p>
-          <div class="card-actions">
-            <button @click="toggle(word)">✅</button>
-            <button @click="startEdit(word)">✏️</button>
-            <button @click="remove(word.id)">🗑</button>
+      <h3>📚 Words to Master</h3>
+      <div class="cards">
+        <div
+          v-for="word in words.filter((w) => !w.mastered)"
+          :key="word.id"
+          class="card"
+        >
+          <!-- Edit Mode -->
+
+          <div v-if="editingId === word.id" class="card-content">
+            <input
+              v-model="editedWord"
+              placeholder="Edit word"
+              class="card-input"
+            />
+            <input
+              v-model="editedMeaning"
+              placeholder="Edit meaning"
+              class="card-input"
+            />
+            <div class="card-buttons">
+              <button class="mark-done" @click="toggle(word)">
+                Mark as done
+              </button>
+              <div class="card-actions">
+                <button @click="saveEdit(word.id)">💾</button>
+                <button @click="cancelEdit">❌</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Mode -->
+          <div v-else class="card-content">
+            <p>
+              <strong>{{ word.word }}</strong>
+            </p>
+            <p>{{ word.meaning }}</p>
+            <div class="card-buttons">
+              <button class="mark-done" @click="toggle(word)">
+                Mark as done
+              </button>
+              <div class="card-actions">
+                <button @click="startEdit(word)">
+                  <img src="@/assets/edit-icon.svg" alt="edit" />
+                </button>
+                <button @click="remove(word.id)">
+                  <img src="@/assets/delete-icon.svg" alt="delete" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <h3>🏆 Mastered</h3>
-    <div class="cards">
-      <div v-for="word in words.filter(w => w.mastered)" :key="word.id" class="card">
-        <div v-if="editingId === word.id">
-          <input v-model="editedWord" />
-          <input v-model="editedMeaning" />
-          <button @click="saveEdit(word.id)">💾</button>
-          <button @click="cancelEdit">❌</button>
-        </div>
-        <div v-else>
-          {{ word.word }} - {{ word.meaning }} ✔️
-          <button @click="startEdit(word)">✏️</button>
-          <button @click="toggle(word)">↩️</button>
-          <button @click="remove(word.id)">🗑</button>
+      <h3>🏆 Mastered Words</h3>
+      <div class="cards">
+        <div
+          v-for="word in words.filter((w) => w.mastered)"
+          :key="word.id"
+          class="card"
+        >
+          <!-- Edit Mode -->
+          <div v-if="editingId === word.id" class="card-content">
+            <input
+              v-model="editedWord"
+              placeholder="Edit word"
+              class="card-input"
+            />
+            <input
+              v-model="editedMeaning"
+              placeholder="Edit meaning"
+              class="card-input"
+            />
+            <div class="card-buttons">
+              <button class="mark-undone" @click="toggle(word)">
+                Word mastered
+              </button>
+              <div class="card-actions">
+                <button @click="saveEdit(word.id)">💾</button>
+                <button @click="cancelEdit">❌</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- View Mode -->
+          <div v-else class="card-content">
+            <p>
+              <strong>{{ word.word }}</strong>
+            </p>
+            <p>{{ word.meaning }}</p>
+            <div class="card-buttons">
+              <button class="mark-undone" @click="toggle(word)">
+                Word mastered
+              </button>
+              <div class="card-actions">
+                <button @click="startEdit(word)">
+                  <img src="@/assets/edit-icon.svg" alt="edit" />
+                </button>
+                <button @click="remove(word.id)">
+                  <img src="@/assets/delete-icon.svg" alt="delete" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
   </div>
 </template>
-
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -81,6 +149,7 @@ async function toggle(word) {
 }
 
 function startEdit(word) {
+  console.log('Editing:', word.word, word.meaning);
   editingId.value = word.id;
   editedWord.value = word.word;
   editedMeaning.value = word.meaning;
@@ -102,8 +171,6 @@ async function saveEdit(id) {
   }
 }
 
-
-
 onMounted(async () => {
   await userStore.fetchUser();
   wordStore.fetchWords();
@@ -114,32 +181,178 @@ onMounted(async () => {
 section {
   display: flex;
   flex-direction: column;
-  margin: 1rem;
-  margin-top: 4rem;
+  margin-top: 3rem;
+  padding: 0.75rem 1rem;
+  background-color: #f6f5f5;
+  font-family: 'Inter', sans-serif;
+}
+
+h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #2d0c57;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #2d0c57;
+  font-family: 'Poppins', sans-serif;
 }
 
 .cards {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 1rem;
+  width: 100%;
+  margin: 0 0;
 }
 
 .card {
-  background: #fff;
-  padding: 1rem;
-  border-radius: 15px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  background-color: #ffffff;
+  border: 2px solid #e0d8ea;
+  border-radius: 20px;
+  padding: 1.2rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 350px;
-  height: 120px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  width: 330px;
+}
+
+.card-input {
+  padding: 0.6rem 1rem;
+  color: #3c2362;
+  border-radius: 999px;
+  border: 2px solid #e0d8ea;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+}
+
+.card-content {
+  color: #3c2362;
+  max-width: 100%;
 }
 
 .card-actions {
   display: flex;
   gap: 0.5rem;
+  width: 100%;
 }
 
+.card-actions button {
+  background: white;
+  border: 2px solid #e0d8ea;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+  height: 40px;
+}
+
+.card-actions button:hover {
+  background-color: #f2ecf9;
+}
+
+.card-actions img {
+  height: 18px;
+  filter: brightness(0) saturate(100%) invert(23%) sepia(8%) saturate(1274%)
+    hue-rotate(228deg) brightness(95%) contrast(90%);
+}
+
+.card-buttons {
+  display: flex;
+  align-items: flex-end;
+  justify-items: space-around;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.mark-done {
+  margin-top: 0.8rem;
+  height: 33px;
+  min-width: 144px;
+  background: none;
+  border: 2px solid #e0d8ea;
+  color: #e0d8ea;
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.mark-done:hover {
+  background-color: #d6b6ff;
+  color: #6c0ee4;
+  border: #d6b6ff;
+}
+
+.mark-undone {
+  margin-top: 0.8rem;
+  height: 33px;
+  min-width: 144px;
+  background: #d6b6ff;
+  color: #6c0ee4;
+  border: #d6b6ff;
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.mark-undone:hover {
+  background-color: #ffffff;
+  color: #e0d8ea;
+  border: #e0d8ea;
+}
+
+button {
+  background-color: #6c0ee4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: 0.2s ease;
+}
+
+input {
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: 1px solid #e0d8ea;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .cards {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .card {
+    width: 330px;
+  }
+  section {
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 5rem 2rem 5rem;
+  background-color: #f6f5f5;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+}
 </style>
