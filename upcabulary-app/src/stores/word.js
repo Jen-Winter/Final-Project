@@ -46,12 +46,35 @@ export const useWordStore = defineStore('words', () => {
     await fetchWords();
   };
 
+  const updateWord = async (id, newWord, newMeaning) => {
+    const { error } = await supabase
+      .from('words')
+      .update({ word: newWord, meaning: newMeaning })
+      .eq('id', id);
+
+    if (error) throw error;
+
+    await fetchWords();
+  };
+
+  const toggleMastered = async (word) => {
+  const { error } = await supabase
+    .from('words')
+    .update({ mastered: !word.mastered })
+    .eq('id', word.id);
+
+  if (error) throw error;
+  await fetchWords();
+};
+
   // On Composition API: Return the state and actions I want to use --
   return {
     words,
     fetchWords,
     addWord,
     deleteWord,
+    updateWord,
+    toggleMastered,
   };
 
 
