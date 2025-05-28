@@ -86,7 +86,7 @@ const handleSignIn = async () => {
 
   try {
     await userStore.signIn(email.value, password.value);
-    router.push('/');
+    router.push('/dashboard');
   } catch (error) {
     if (error.message.includes('Invalid login credentials')) {
       errorMessage.value = 'Incorrect email or password.';
