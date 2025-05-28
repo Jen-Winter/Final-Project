@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
 import { supabase } from './supabase';
 import { ref } from 'vue';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 export const useUserStore = defineStore('user', () => {
   // ***STATES*** hold data that persists in the store and is reactive
@@ -33,17 +35,40 @@ export const useUserStore = defineStore('user', () => {
     user.value = data.user;
   };
 
-  const signUp = async (email, password, name) => {
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: { name },
-      },
-    });
-    if (error) throw error;
+ const signUp = async (email, password, name) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { name },
+      emailRedirectTo: `${window.location.origin}/`
+    },
+  });
+
+  if (error) {
+    Toastify({
+      text: "Sign up failed: " + error.message,
+      duration: 3000,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "#ff4d4f",
+    }).showToast();
+    throw error;
+  }
+
+  if (data.user?.identities?.length === 0 || !data.session) {
+    // Email confirmation required
+    Toastify({
+      text: "✅ Check your email to confirm your account.",
+      duration: 4000,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "#6c0ee4",
+    }).showToast();
+  } else {
     user.value = data.user;
-  };
+  }
+};
 
   const signIn = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -98,4 +123,4 @@ export const useUserStore = defineStore('user', () => {
     createUser,
     deleteUser,
   };
-});
+})

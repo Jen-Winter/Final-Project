@@ -33,7 +33,7 @@
             />
             <div class="card-buttons">
               <button class="mark-done" @click="toggle(word)">
-                Mark as done
+                Mark as mastered
               </button>
               <div class="card-actions">
                 <button @click="saveEdit(word.id)">
@@ -55,7 +55,7 @@
             <p>{{ word.meaning }}</p>
             <div class="card-buttons">
               <button class="mark-done" @click="toggle(word)">
-                Mark as done
+                Mark as mastered
               </button>
               <div class="card-actions">
                 <button @click="startEdit(word)">
@@ -302,7 +302,7 @@ h3 {
 .mark-done {
   margin-top: 0.8rem;
   height: 33px;
-  min-width: 144px;
+  min-width: 170px;
   background: none;
   border: 2px solid #e0d8ea;
   color: #e0d8ea;
@@ -384,7 +384,7 @@ input {
 
 .empty-image{
   width: 100%;
-  max-width: 260px;
+  max-width: 110px;
 }
 
 .empty-state {
@@ -393,11 +393,12 @@ input {
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 70vh;
+  margin-top: 2rem;
+  margin-bottom:2rem;
 }
 
 .empty-state p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #3c2362;
   margin-top: 1rem;
   font-family: 'Poppins', 'Inter', sans-serif;
@@ -421,5 +422,19 @@ input {
     font-family: 'Inter', sans-serif;
     margin-top: 0;
   }
+  .empty-image{
+  width: 100%;
+  max-width: 220px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 70vh;
+  
+}
 }
 </style>
