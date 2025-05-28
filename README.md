@@ -4,7 +4,7 @@ This is my final project for the Ironhack Frontend Development Bootcamp. **Upcab
 
 Built with **Javascript**, **Vue 3**, **Pinia**, and **Supabase**, and deployed on **Netlify**, this project demonstrates my ability to create a modern, full-featured Single Page Application (SPA) with authentication, persistent data, and a polished user experience. The 4 basic operations of persisent data bases were implemented on the User's dashboard: CRUD (Create, read, update and delete), allowing full data flexibility. 
 
-> ⏱️ Over 45+ hours were spent designing, building, and refining the app.
+> ⏱️ Over 45+ hours were spent designing, building, testing and refining the app.
 
 [View deployed app](https://upcabulary.netlify.app/)  
 [View final presentation](#)
