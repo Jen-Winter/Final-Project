@@ -179,9 +179,9 @@ onMounted(async () => {
 
 <style scoped>
 section {
+  margin-top: 3rem;
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
   padding: 0.75rem 1rem;
   background-color: #f6f5f5;
   font-family: 'Inter', sans-serif;
@@ -353,6 +353,7 @@ input {
   background-color: #f6f5f5;
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
+  margin-top: 0;
 }
 }
 </style>
