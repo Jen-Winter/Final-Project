@@ -9,14 +9,22 @@ export const useWordStore = defineStore('words', () => {
 
   // ACTIONS: methods to interact with the store and perform operations
   const fetchWords = async () => {
-    const { data, error } = await supabase
-      .from('words')
-      .select('*')
-      .order('id', { ascending: true });
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-    if (error) throw error;
-    words.value = data;
-  };
+  if (userError) throw userError;
+
+  const { data, error } = await supabase
+    .from('words')
+    .select('*')
+    .eq('user_id', user.id) // ✅ Only fetch this user's words
+    .order('id', { ascending: true });
+
+  if (error) throw error;
+  words.value = data;
+};
 
   const addWord = async (word, meaning) => {
     const {
