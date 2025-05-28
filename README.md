@@ -7,7 +7,7 @@ Built with **Javascript**, **Vue 3**, **Pinia**, and **Supabase**, and deployed 
 > ⏱️ Over 45+ hours were spent designing, building, testing and refining the app.
 
 [View deployed app](https://upcabulary.netlify.app/)  
-[View final presentation](#)
+[View final presentation](https://www.canva.com/design/DAGov-j4QuI/lxl9l9tGz5E1lAg56fHjbg/view?utm_content=DAGov-j4QuI&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0de571748e)
 
 ---
 
