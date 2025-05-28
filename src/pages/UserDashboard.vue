@@ -5,7 +5,12 @@
       <h2>Welcome, {{ user?.user_metadata?.name }}</h2>
 
       <AddWordForm />
-
+      <transition name="fade" mode="out-in">
+<div v-if="hasNoWords" class="empty-state">
+  <img src="@/assets/undraw_to-do-list_eoia.svg" alt="No words yet" class="empty-image" />
+  <p class="empty-text">You haven’t added any words yet<br />Start by adding your first one!</p>
+</div>
+<div v-else>
       <h3>WORDS TO MASTER</h3>
       <transition-group name="card-fade" tag="div" class="cards">
         <div
@@ -123,12 +128,16 @@
           </div>
         </div>
       </transition-group>
+      </div>
+      </transition>
     </section>
+
   </div>
+  
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useUserStore } from '@/stores/user';
 import { useWordStore } from '@/stores/word';
 import { storeToRefs } from 'pinia';
@@ -142,6 +151,7 @@ const { words } = storeToRefs(wordStore);
 const editingId = ref(null);
 const editedWord = ref('');
 const editedMeaning = ref('');
+const hasNoWords = computed(() => words.value.length === 0);
 
 async function remove(id) {
   try {
@@ -345,6 +355,16 @@ input {
   box-sizing: border-box;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+}
+
 .card-fade-enter-active,
 .card-fade-leave-active {
   transition: all 0.4s ease;
@@ -360,6 +380,28 @@ input {
 .card-fade-leave-from {
   opacity: 1;
   transform: translateY(0);
+}
+
+.empty-image{
+  width: 100%;
+  max-width: 260px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 70vh;
+}
+
+.empty-state p {
+  font-size: 1.2rem;
+  color: #3c2362;
+  margin-top: 1rem;
+  font-family: 'Poppins', 'Inter', sans-serif;
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
