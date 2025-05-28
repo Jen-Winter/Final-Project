@@ -197,8 +197,8 @@ h2 {
 h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
   color: #2d0c57;
   font-family: 'Poppins', sans-serif;
 }
@@ -206,6 +206,7 @@ h3 {
 .cards {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
   margin: 0 0;
@@ -222,7 +223,7 @@ h3 {
   box-shadow: none;
   font-family: 'Inter', sans-serif;
   position: relative;
-  width: 330px;
+  min-width: 330px;
 }
 
 .card-input {

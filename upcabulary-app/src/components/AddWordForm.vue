@@ -11,7 +11,7 @@
       />
       <input
         v-model="meaning"
-        placeholder="Enter its meaning (optional)"
+        placeholder="Enter its meaning or examples of use (optional)"
         class="form-input"
       />
       <button type="submit" class="submit-button">Add Word</button>
