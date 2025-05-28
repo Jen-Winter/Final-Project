@@ -7,7 +7,7 @@
       <AddWordForm />
 
       <h3>WORDS TO MASTER</h3>
-      <div class="cards">
+      <transition-group name="card-fade" tag="div" class="cards">
         <div
           v-for="word in words.filter((w) => !w.mastered)"
           :key="word.id"
@@ -31,13 +31,18 @@
                 Mark as done
               </button>
               <div class="card-actions">
-                <button @click="saveEdit(word.id)">💾</button>
-                <button @click="cancelEdit">❌</button>
+                <button @click="saveEdit(word.id)">
+                  <img src="@/assets/save.svg" alt="save" />
+                </button>
+                <button @click="cancelEdit">
+                  <img src="@/assets/x.svg" alt="cancel" />
+                </button>
               </div>
             </div>
           </div>
 
           <!-- View Mode -->
+
           <div v-else class="card-content">
             <p>
               <strong>{{ word.word }}</strong>
@@ -58,10 +63,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
 
       <h3>MASTERED WORDS</h3>
-      <div class="cards">
+
+      <transition-group name="card-fade" tag="div" class="cards">
         <div
           v-for="word in words.filter((w) => w.mastered)"
           :key="word.id"
@@ -84,8 +90,12 @@
                 Word mastered
               </button>
               <div class="card-actions">
-                <button @click="saveEdit(word.id)"><img src="@/assets/save.svg" alt="save" /></button>
-                <button @click="cancelEdit"><img src="@/assets/x.svg" alt="cancel" /></button>
+                <button @click="saveEdit(word.id)">
+                  <img src="@/assets/save.svg" alt="save" />
+                </button>
+                <button @click="cancelEdit">
+                  <img src="@/assets/x.svg" alt="cancel" />
+                </button>
               </div>
             </div>
           </div>
@@ -97,9 +107,7 @@
             </p>
             <p>{{ word.meaning }}</p>
             <div class="card-buttons">
-              <button class="mark-undone">
-                Word mastered
-              </button>
+              <button class="mark-undone">Word mastered</button>
               <div class="card-actions">
                 <button @click="startEdit(word)">
                   <img src="@/assets/edit-icon.svg" alt="edit" />
@@ -114,7 +122,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </transition-group>
     </section>
   </div>
 </template>
@@ -202,7 +210,7 @@ h3 {
   font-weight: 600;
   margin-top: 3rem;
   margin-bottom: 2rem;
-  color: #7203FF;
+  color: #7203ff;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -211,7 +219,6 @@ h3 {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 1rem;
-  width: 100%;
   margin: 0 0;
 }
 
@@ -225,8 +232,9 @@ h3 {
   align-items: center;
   box-shadow: none;
   font-family: 'Inter', sans-serif;
-  position: relative;
-  min-width: 330px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .card-input {
@@ -269,7 +277,8 @@ h3 {
 
 .card-actions img {
   height: 18px;
-  filter: brightness(0) saturate(100%) invert(57%) sepia(8%) saturate(1009%) hue-rotate(224deg) brightness(96%) contrast(87%);
+  filter: brightness(0) saturate(100%) invert(57%) sepia(8%) saturate(1009%)
+    hue-rotate(224deg) brightness(96%) contrast(87%);
 }
 
 .card-buttons {
@@ -310,7 +319,7 @@ h3 {
   padding: 0.4rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 400;
-  cursor: none;
+  cursor: default;
 }
 
 button {
@@ -336,22 +345,39 @@ input {
   box-sizing: border-box;
 }
 
+.card-fade-enter-active,
+.card-fade-leave-active {
+  transition: all 0.4s ease;
+}
+
+.card-fade-enter-from,
+.card-fade-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.card-fade-enter-to,
+.card-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (min-width: 768px) {
   .cards {
     flex-direction: row;
     gap: 1rem;
   }
   .card {
-    width: 330px;
+    width: 350px;
   }
   section {
-  display: flex;
-  flex-direction: column;
-  padding: 5rem 5rem 2rem 5rem;
-  background-color: #f6f5f5;
-  min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  margin-top: 0;
-}
+    display: flex;
+    flex-direction: column;
+    padding: 5rem 5rem 2rem 5rem;
+    background-color: #f6f5f5;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    margin-top: 0;
+  }
 }
 </style>

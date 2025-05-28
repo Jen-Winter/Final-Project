@@ -197,7 +197,7 @@ p a:hover {
     box-sizing: border-box;
   }
 
-h1 {
+  h1 {
     font-size: 1.6rem;
   }
 }

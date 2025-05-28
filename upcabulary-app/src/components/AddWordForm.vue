@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Add new words to your vocabulary:</h3>
+    <h3>Add new words to your personal vocabulary:</h3>
 
     <form @submit.prevent="submitForm" class="word-form">
       <input
@@ -54,14 +54,14 @@ h3 {
 .word-form {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .word-form button {
   align-self: flex-start;
   margin-top: 0;
   padding: 0.6rem 1.2rem;
-  background-color: #0BCE83;
+  background-color: #0bce83;
   color: white;
   border: none;
   border-radius: 999px;
@@ -100,7 +100,7 @@ h3 {
 }
 
 .submit-button:hover {
-  background-color: #19BB7D;
+  background-color: #19bb7d;
 }
 
 .error-message {

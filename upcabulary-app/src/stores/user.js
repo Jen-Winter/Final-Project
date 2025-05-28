@@ -13,25 +13,25 @@ export const useUserStore = defineStore('user', () => {
   // ***ACTIONS*** methods to interact with the store and perform operations
   // === Authentication Methods ===
   const fetchUser = async () => {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-  if (!session) {
-    user.value = null;
-    return;
-  }
+    if (!session) {
+      user.value = null;
+      return;
+    }
 
-  const { data, error } = await supabase.auth.getUser();
+    const { data, error } = await supabase.auth.getUser();
 
-  if (error) {
-    console.error('Supabase getUser error:', error.message);
-    user.value = null;
-    return;
-  }
+    if (error) {
+      console.error('Supabase getUser error:', error.message);
+      user.value = null;
+      return;
+    }
 
-  user.value = data.user;
-};
+    user.value = data.user;
+  };
 
   const signUp = async (email, password, name) => {
     const { data, error } = await supabase.auth.signUp({

@@ -3,8 +3,8 @@ import { supabase } from './supabase.js';
 import { ref } from 'vue';
 
 export const useWordStore = defineStore('words', () => {
-   // STATES: hold data that persists in the store and is reactive
-   // Stores the list of words
+  // STATES: hold data that persists in the store and is reactive
+  // Stores the list of words
   const words = ref([]);
 
   // ACTIONS: methods to interact with the store and perform operations
@@ -58,14 +58,14 @@ export const useWordStore = defineStore('words', () => {
   };
 
   const toggleMastered = async (word) => {
-  const { error } = await supabase
-    .from('words')
-    .update({ mastered: !word.mastered })
-    .eq('id', word.id);
+    const { error } = await supabase
+      .from('words')
+      .update({ mastered: !word.mastered })
+      .eq('id', word.id);
 
-  if (error) throw error;
-  await fetchWords();
-};
+    if (error) throw error;
+    await fetchWords();
+  };
 
   // On Composition API: Return the state and actions I want to use --
   return {
@@ -76,6 +76,4 @@ export const useWordStore = defineStore('words', () => {
     updateWord,
     toggleMastered,
   };
-
-
 });
