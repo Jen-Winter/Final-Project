@@ -61,7 +61,7 @@ h3 {
   align-self: flex-start;
   margin-top: 0;
   padding: 0.6rem 1.2rem;
-  background-color: #6c0ee4;
+  background-color: #0BCE83;
   color: white;
   border: none;
   border-radius: 999px;
@@ -100,7 +100,7 @@ h3 {
 }
 
 .submit-button:hover {
-  background-color: #580bc4;
+  background-color: #19BB7D;
 }
 
 .error-message {

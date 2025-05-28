@@ -6,7 +6,7 @@
 
       <AddWordForm />
 
-      <h3>📚 Words to Master</h3>
+      <h3>WORDS TO MASTER</h3>
       <div class="cards">
         <div
           v-for="word in words.filter((w) => !w.mastered)"
@@ -60,7 +60,7 @@
         </div>
       </div>
 
-      <h3>🏆 Mastered Words</h3>
+      <h3>MASTERED WORDS</h3>
       <div class="cards">
         <div
           v-for="word in words.filter((w) => w.mastered)"
@@ -84,8 +84,8 @@
                 Word mastered
               </button>
               <div class="card-actions">
-                <button @click="saveEdit(word.id)">💾</button>
-                <button @click="cancelEdit">❌</button>
+                <button @click="saveEdit(word.id)"><img src="@/assets/save.svg" alt="save" /></button>
+                <button @click="cancelEdit"><img src="@/assets/x.svg" alt="cancel" /></button>
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@
             </p>
             <p>{{ word.meaning }}</p>
             <div class="card-buttons">
-              <button class="mark-undone" @click="toggle(word)">
+              <button class="mark-undone">
                 Word mastered
               </button>
               <div class="card-actions">
@@ -106,6 +106,9 @@
                 </button>
                 <button @click="remove(word.id)">
                   <img src="@/assets/delete-icon.svg" alt="delete" />
+                </button>
+                <button @click="toggle(word)">
+                  <img src="@/assets/return-icon.svg" alt="delete" />
                 </button>
               </div>
             </div>
@@ -199,7 +202,7 @@ h3 {
   font-weight: 600;
   margin-top: 3rem;
   margin-bottom: 2rem;
-  color: #2d0c57;
+  color: #7203FF;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -266,8 +269,7 @@ h3 {
 
 .card-actions img {
   height: 18px;
-  filter: brightness(0) saturate(100%) invert(23%) sepia(8%) saturate(1274%)
-    hue-rotate(228deg) brightness(95%) contrast(90%);
+  filter: brightness(0) saturate(100%) invert(57%) sepia(8%) saturate(1009%) hue-rotate(224deg) brightness(96%) contrast(87%);
 }
 
 .card-buttons {
@@ -308,12 +310,7 @@ h3 {
   padding: 0.4rem 1.2rem;
   font-size: 0.9rem;
   font-weight: 400;
-}
-
-.mark-undone:hover {
-  background-color: #ffffff;
-  color: #e0d8ea;
-  border: #e0d8ea;
+  cursor: none;
 }
 
 button {

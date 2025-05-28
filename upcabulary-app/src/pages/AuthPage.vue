@@ -155,11 +155,11 @@ button {
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  cursor: pointer;
   transition: 0.2s ease;
   box-sizing: border-box;
   max-width: 340px;
   font-family: 'Inter', sans-serif;
+  cursor: pointer;
 }
 
 button:hover {
@@ -184,5 +184,21 @@ a {
 
 p a:hover {
   text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6rem;
+    height: 100vh;
+    background-color: #f6f5f5;
+    box-sizing: border-box;
+  }
+
+h1 {
+    font-size: 1.6rem;
+  }
 }
 </style>

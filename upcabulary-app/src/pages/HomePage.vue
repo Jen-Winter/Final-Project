@@ -28,26 +28,32 @@ function goToAuth() {
   justify-content: center;
   height: 100vh;
   background-color: #f6f5f5;
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 section {
-  background: #ffffff;
-  padding: 2rem 2rem;
-  border-radius: 20px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 90%;
-  max-width: 400px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  background: #ffffff;
+  padding: 3rem 2rem;
   font-family: 'Inter', sans-serif;
+  border-radius: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: #6c0ee4;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
 }
 
 p {
@@ -55,10 +61,11 @@ p {
   font-size: 1rem;
   color: #333;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 button {
-  background: #6c0ee4;
+  background: #0bce83;
   color: white;
   border: none;
   border-radius: 25px;
@@ -73,6 +80,27 @@ button {
 }
 
 button:hover {
-  background: #580bc4;
+  background: #19bb7d;
+}
+
+@media (min-width: 768px) {
+  section {
+    width: 90%;
+    padding: 3rem 2rem;
+  }
+
+  .home {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6rem;
+    height: 100vh;
+    background-color: #f6f5f5;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
 }
 </style>

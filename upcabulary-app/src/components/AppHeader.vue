@@ -7,23 +7,27 @@
       </div>
 
       <div class="header-right">
-  <button
-    v-if="route.path !== '/auth' && !user"
-    @click="goToLogin"
-    class="login-button"
-  >
-    <img src="../assets/user.svg" alt="login" class="user-icon" /> Log in
-  </button>
+        <button
+          v-if="route.path !== '/auth' && !user"
+          @click="goToLogin"
+          class="login-button"
+        >
+          <img src="../assets/user.svg" alt="login" class="user-icon" /> Log in
+        </button>
 
-  <button
-    v-if="route.path !== '/auth' && user"
-    @click="logout"
-    class="logout-button"
-  >
-  <img src="../assets/sign-out-icon.svg" alt="login" class="logout-icon" />
-    Sign out
-  </button>
-</div>
+        <button
+          v-if="route.path !== '/auth' && user"
+          @click="logout"
+          class="logout-button"
+        >
+          <img
+            src="../assets/sign-out-icon.svg"
+            alt="login"
+            class="logout-icon"
+          />
+          Sign out
+        </button>
+      </div>
     </div>
   </header>
 </template>
@@ -41,20 +45,18 @@ const route = useRoute();
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 
-
 function goToLogin() {
   router.push('/auth');
 }
 
 async function logout() {
-  await userStore.signOut()
+  await userStore.signOut();
 
   const wordStore = useWordStore();
-  wordStore.words.value = []
+  wordStore.words.value = [];
 
-  await router.push('/')
+  await router.push('/');
 }
-
 </script>
 
 <style scoped>
@@ -65,6 +67,7 @@ async function logout() {
   width: 100%;
   background: #f6f5f5;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 }
 
 .header-container {
@@ -107,6 +110,11 @@ async function logout() {
   white-space: nowrap;
   height: 34px;
   width: 98px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: rgba(214, 182, 255, 0.8);
 }
 
 .user-icon {
@@ -119,33 +127,33 @@ async function logout() {
   justify-content: center;
   gap: 0.3rem;
   background: white;
-  color: #D9D0E3;
-  border: #D9D0E3 1px solid;
+  color: #d9d0e3;
+  border: #d9d0e3 1px solid;
   border-radius: 25rem;
   font-size: 0.9rem;
   white-space: nowrap;
   height: 30px;
   width: 98px;
   padding: 0.5rem;
+  cursor: pointer;
 }
 
 .logout-button:hover {
-  background: rgba(217, 208, 227, 0.2) ;
-  }
+  background: rgba(217, 208, 227, 0.2);
+}
 
 .logout-icon {
   height: 16px;
 }
 
 @media (min-width: 768px) {
-.header-container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 0.75rem 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
+  .header-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0.75rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 </style>
